@@ -1,33 +1,25 @@
-import Course from "./Course.jsx";
-import Header from "./Header.jsx";
+import { useState } from "react";
+import Note from "./components/Note";
 
-const App = () => {
-  const course = {
-    id: 1,
-    name: "Half Stack application development",
-    parts: [
-      {
-        name: "Fundamentals of React",
-        exercises: 10,
-        id: 1,
-      },
-      {
-        name: "Using props to pass data",
-        exercises: 7,
-        id: 2,
-      },
-      {
-        name: "State of a component",
-        exercises: 14,
-        id: 3,
-      },
-    ],
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes);
+  const addNote = (event) => {
+    event.preventDefault();
+    console.log("button clicked", event.target);
   };
 
   return (
     <div>
-      <Header name={course.name} />
-      <Course course={course.parts} />
+      <h1>Notes</h1>
+      <ul>
+        {/* {notes.map((note) => (
+          <Note key={note.id} note={note} />
+        ))} */}
+      </ul>
+      <form onSubmit={addNote}>
+        <input />
+        <button type="submit">save</button>
+      </form>
     </div>
   );
 };
