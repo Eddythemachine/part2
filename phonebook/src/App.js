@@ -1,8 +1,12 @@
 import { useState } from "react";
+import Personform from "./components/Personform.jsx";
 
 const App = () => {
  const [persons, setPersons] = useState([
-  { name: "Arto Hellas", no: "0807424244", id: 1 },
+  { name: "Arto Hellas", number: "040-123456", id: 1 },
+  { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
+  { name: "Dan Abramov", number: "12-43-234345", id: 3 },
+  { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
  ]);
  const [newName, setNewName] = useState([...persons]);
 
@@ -33,19 +37,14 @@ const App = () => {
 
  return (
   <div>
-   <h2>Phonebook</h2>
-   <form onSubmit={savePhoneDetails}>
-    <div>
-     name: <input type="text" name="" id="name" />
-     <br />
-     number: <input type="number" name="" id="no" />
-    </div>
-    <div>
-     <button type="submit">add</button>
-    </div>
+   <h1>Phonebook</h1>
+   <form action="">
+    {/* filter with: <input type="text" onChange={filterPhoneNumbers}/> */}
    </form>
+
+   <h2>Add a new</h2>
+   <Personform savePhoneDetails={savePhoneDetails} />
    <h2>Numbers</h2>
-   {/* <div>debug: {newName}</div> */}
   </div>
  );
 };
