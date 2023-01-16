@@ -5,6 +5,7 @@ import Note from "./components/Note.jsx";
 function App() {
  const [note, setNote] = useState([{ name: "eddy", id: 0 }]);
  const [newNote, setNewNote] = useState([...note]);
+ const [impList, setImpList] = useState([...newNote]);
  console.log("Render");
 
  const addNote = (event) => {
@@ -21,16 +22,23 @@ function App() {
    important: important,
   };
   console.log(newNote);
-
   notes.push(data);
   setNewNote(newNote.concat(data));
+  showImp();
  };
 
+ function showImp() {
+  const checkImp = document.getElementById("show-imp");
+  const filteredList = checkImp.checked
+   ? newNote.filter((el) => {
+      return el.important;
+     })
+   : newNote;
+
+  setImpList(filteredList);
+ }
  let notes = [];
- const filteredList = newNote.filter((el) => {
-  return el.important;
- });
- console.log(filteredList);
+
  return (
   <div>
    <h1>NOTES APP</h1>
@@ -43,7 +51,16 @@ function App() {
     <label htmlFor="">Important</label>
     <input type="checkbox" name="important" id="imp" />
    </form>
-   {/* <Note note={newNote} /> */}
+   <Note note={impList} />
+   <form action="">
+    <label htmlFor="">Show only important</label>
+    <input
+     type="checkbox"
+     name="show important"
+     id="show-imp"
+     onChange={showImp}
+    />
+   </form>
   </div>
  );
 }
