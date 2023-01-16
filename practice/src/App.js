@@ -1,61 +1,42 @@
 import { useState } from "react";
-import Note from "./components/Note";
+import React from "react";
+import Note from "./components/Note.jsx";
 
-const App = (props) => {
- const [notes, setNotes] = useState([]);
- const viewNote = (event) => {
-  // console.log(event.target.value);
- };
- let newNote = [...notes];
+function App() {
+ const [note, setNote] = useState([{ name: "eddy", id: 0 }]);
+ const [newNote, setNewNote] = useState([]);
+ console.log("Render");
+
  const addNote = (event) => {
   event.preventDefault();
-  const note = document.querySelector(".notes");
-  const important = document.getElementById("imp");
-  const isImportant = important.checked ? true : false;
-  const id = notes.length + 1;
-  const newCreatedNote = {
-   note: note.value,
+  const name = document.getElementById("add-note").value;
+  const date = new Date().toISOString();
+  const id = newNote.length + 1;
+  let data = {
+   name: name,
+   date: date,
    id: id,
-   important: isImportant,
   };
-  newNote.push(newCreatedNote);
-  setNotes(newNote);
-  // console.log("button clicked", event.target, );
-  // console.log(newCreatedNote);
- };
+  console.log(newNote);
 
- const filterArray = newNote.filter((el) => {
-  return el.important;
- });
-
- const displayOnlyImportantList = () => {
-  const displayList = document.getElementById("display");
-  showNotes = displayList?.checked ? filterArray : newNote;
-  console.log(`Outside ${displayList?.checked}`);
+  notes.push(data);
+  setNewNote(notes);
  };
+ console.log(newNote);
+ console.log(note);
+ let notes = [];
  return (
   <div>
-   <h1>Notes</h1>
-   <form onSubmit={addNote}>
-    <label htmlFor="important">Important</label>
-    <input type="checkbox" name="important" id="imp" />
+   <h1>NOTES APP</h1>
+   <form action="" onSubmit={addNote}>
+    <label htmlFor="add note">Add new note</label>
     <br />
-    <input onChange={viewNote} className={"notes"} />
-    <button type="submit">save</button>
+    <input type="text" name="add note" id="add-note" />
+    <button type="submit">Submit</button>
    </form>
-
-   <Note note={showNotes} />
-   <form action="">
-    <label htmlFor="show">Show Only Important List</label>
-    <input
-     type="checkbox"
-     name="show"
-     id="display"
-     onChange={displayOnlyImportantList}
-    />
-   </form>
+   {/* <Note note={newNote} /> */}
   </div>
  );
-};
+}
 
 export default App;

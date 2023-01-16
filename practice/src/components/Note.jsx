@@ -1,22 +1,11 @@
-import React from "react";
+import { Component } from "react";
 
-function Note({ note }) {
- return (
-  <div>
-   <ul>
-    {note.map((el) => {
-     const { id, note } = el;
-     //  console.log(note);
-     return (
-      <li key={id}>
-       {/* <span>{id}</span> */}
-       {note}
-      </li>
-     );
-    })}
-   </ul>
-  </div>
- );
+class Note extends Component {
+ render() {
+  const { note } = this.props;
+  console.log(note);
+  return <div></div>;
+ }
 }
 
 export default Note;
