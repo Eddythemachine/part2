@@ -28,11 +28,12 @@ const App = () => {
   const found = newName.some(
    (el) => el.name.toLocaleLowerCase() === name.toLocaleLowerCase()
   );
-  filterPhoneNumbers();
   if (found) {
+   filterPhoneNumbers();
    alert(`${name} exists in phone book`);
   } else {
    filterPhoneNumbers();
+   setNewName(newData);
   }
  };
  function filterPhoneNumbers() {
@@ -41,6 +42,7 @@ const App = () => {
    return el.name.toLocaleLowerCase().includes(filtervalue.toLocaleLowerCase());
   });
   setFilterList(displayFilter);
+  console.log("Working");
  }
  return (
   <div>
@@ -51,7 +53,10 @@ const App = () => {
    </form>
 
    <h2>Add a new</h2>
-   <Personform savePhoneDetails={savePhoneDetails} />
+   <Personform
+    savePhoneDetails={savePhoneDetails}
+    filterPhoneNumbers={filterPhoneNumbers}
+   />
    <h2>Numbers</h2>
    <Persons data={filterList} />
   </div>
