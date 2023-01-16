@@ -4,7 +4,7 @@ import Note from "./components/Note.jsx";
 
 function App() {
  const [note, setNote] = useState([{ name: "eddy", id: 0 }]);
- const [newNote, setNewNote] = useState([]);
+ const [newNote, setNewNote] = useState([...note]);
  console.log("Render");
 
  const addNote = (event) => {
@@ -12,19 +12,25 @@ function App() {
   const name = document.getElementById("add-note").value;
   const date = new Date().toISOString();
   const id = newNote.length + 1;
+  const checkImportance = document.getElementById("imp");
+  const important = checkImportance.checked ? true : false;
   let data = {
    name: name,
    date: date,
    id: id,
+   important: important,
   };
   console.log(newNote);
 
   notes.push(data);
-  setNewNote(notes);
+  setNewNote(newNote.concat(data));
  };
- console.log(newNote);
- console.log(note);
+
  let notes = [];
+ const filteredList = newNote.filter((el) => {
+  return el.important;
+ });
+ console.log(filteredList);
  return (
   <div>
    <h1>NOTES APP</h1>
@@ -33,6 +39,9 @@ function App() {
     <br />
     <input type="text" name="add note" id="add-note" />
     <button type="submit">Submit</button>
+    <br />
+    <label htmlFor="">Important</label>
+    <input type="checkbox" name="important" id="imp" />
    </form>
    {/* <Note note={newNote} /> */}
   </div>
