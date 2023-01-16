@@ -7,16 +7,24 @@ const App = () => {
  const savePhoneDetails = (event) => {
   event.preventDefault();
   const name = document.getElementById("name").value;
-  console.log(name);
   const data = {
    name: name,
   };
   let newData = [];
   newData = [...newName];
   newData.push(data);
-  setNewName(newData);
+  const found = newName.some(
+   (el) => el.name.toLocaleLowerCase() === name.toLocaleLowerCase()
+  );
+  if (found) {
+   alert("Name exists in phone book");
+  } else {
+   setNewName(newData);
+  }
+
+  console.log(newName);
  };
- console.log(newName);
+
  return (
   <div>
    <h2>Phonebook</h2>
