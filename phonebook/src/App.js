@@ -1,8 +1,11 @@
+// Imports
 import { useState } from "react";
 import Personform from "./components/Personform.jsx";
 import Persons from "./components/Persons.jsx";
+import axios from "axios";
 
 const App = () => {
+ // useState
  const [persons, setPersons] = useState([
   { name: "Arto Hellas", no: "040-123456", id: 1 },
   { name: "Ada Lovelace", no: "39-44-5323523", id: 2 },
@@ -12,6 +15,7 @@ const App = () => {
  const [newName, setNewName] = useState([...persons]);
  const [filterList, setFilterList] = useState([...persons]);
 
+ // Adding phonebook
  const savePhoneDetails = (event) => {
   event.preventDefault();
   const name = document.getElementById("name").value;
@@ -36,14 +40,21 @@ const App = () => {
    setNewName(newData);
   }
  };
+
+ // Filtering the phonebook list
  function filterPhoneNumbers() {
   const filtervalue = document.getElementById("filtervalue").value;
   const displayFilter = newName.filter((el) => {
    return el.name.toLocaleLowerCase().includes(filtervalue.toLocaleLowerCase());
   });
   setFilterList(displayFilter);
-  console.log("Working");
  }
+
+ // Axios
+ const promise = axios.get("http://localhost:3001/notes");
+ console.log(promise);
+ const promise2 = axios.get("http://localhost:3001/noted");
+ console.log(promise2);
  return (
   <div>
    <h1>Phonebook</h1>
