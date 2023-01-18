@@ -1,19 +1,16 @@
 // Imports
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Personform from "./components/Personform.jsx";
 import Persons from "./components/Persons.jsx";
 import axios from "axios";
 
 const App = () => {
  // useState
- const [persons, setPersons] = useState([
-  { name: "Arto Hellas", no: "040-123456", id: 1 },
-  { name: "Ada Lovelace", no: "39-44-5323523", id: 2 },
-  { name: "Dan Abramov", no: "12-43-234345", id: 3 },
-  { name: "Mary Poppendieck", no: "39-23-6423122", id: 4 },
- ]);
+ const [persons, setPersons] = useState([]);
+ // Using effect to fetch data from our local db Axios
+
  const [newName, setNewName] = useState([...persons]);
- const [filterList, setFilterList] = useState([...persons]);
+ const [filterList, setFilterList] = useState([...newName]);
 
  // Adding phonebook
  const savePhoneDetails = (event) => {
@@ -49,12 +46,16 @@ const App = () => {
   });
   setFilterList(displayFilter);
  }
-
- // Axios
- const promise = axios.get("http://localhost:3001/notes");
- console.log(promise);
- const promise2 = axios.get("http://localhost:3001/noted");
- console.log(promise2);
+ useEffect(() => {
+  console.log("Start effect");
+  return () => {
+   axios.get("http://localhost:3001/persons").then((res) => {
+    console.log("Inside effect");
+    setPersons(res.data);
+   });
+  };
+ }, []);
+ console.log(newName);
  return (
   <div>
    <h1>Phonebook</h1>
