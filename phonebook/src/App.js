@@ -7,44 +7,37 @@ import axios from "axios";
 const App = () => {
  // useState
  const [persons, setPersons] = useState([]);
- // Using effect to fetch data from our local db Axios
-
- const [newName, setNewName] = useState([...persons]);
- const [filterList, setFilterList] = useState([...newName]);
+ const [searchWorld, setSearchWorld] = useState("");
 
  // Adding phonebook
  const savePhoneDetails = (event) => {
   event.preventDefault();
   const name = document.getElementById("name").value;
   const no = document.getElementById("no").value;
-  const id = newName.length + 1;
+  const id = persons.length + 1;
   const data = {
    name: name,
    no: no,
    id: id,
   };
   let newData = [];
-  newData = [...newName];
+  newData = [...persons];
   newData.push(data);
-  const found = newName.some(
+  const found = persons.some(
    (el) => el.name.toLocaleLowerCase() === name.toLocaleLowerCase()
   );
   if (found) {
-   filterPhoneNumbers();
    alert(`${name} exists in phone book`);
   } else {
-   filterPhoneNumbers();
-   setNewName(newData);
+   setPersons(newData);
   }
  };
-
+ const showList = persons.filter((el) => {
+  return el.name.toLowerCase().includes(searchWorld.toLowerCase());
+ });
  // Filtering the phonebook list
- function filterPhoneNumbers() {
-  const filtervalue = document.getElementById("filtervalue").value;
-  const displayFilter = newName.filter((el) => {
-   return el.name.toLocaleLowerCase().includes(filtervalue.toLocaleLowerCase());
-  });
-  setFilterList(displayFilter);
+ function filterPhoneNumbers(event) {
+  setSearchWorld(event.target.value);
  }
  useEffect(() => {
   console.log("Start effect");
@@ -55,7 +48,7 @@ const App = () => {
    });
   };
  }, []);
- console.log(newName);
+ console.log(persons);
  return (
   <div>
    <h1>Phonebook</h1>
@@ -65,12 +58,9 @@ const App = () => {
    </form>
 
    <h2>Add a new</h2>
-   <Personform
-    savePhoneDetails={savePhoneDetails}
-    filterPhoneNumbers={filterPhoneNumbers}
-   />
+   <Personform savePhoneDetails={savePhoneDetails} />
    <h2>Numbers</h2>
-   <Persons data={filterList} />
+   <Persons data={showList} />
   </div>
  );
 };

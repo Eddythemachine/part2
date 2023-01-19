@@ -1,6 +1,6 @@
 import React from "react";
 
-function Personform({ savePhoneDetails, filterPhoneNumbers }) {
+function Personform({ savePhoneDetails }) {
  return (
   <div>
    <form onSubmit={savePhoneDetails}>
@@ -10,9 +10,7 @@ function Personform({ savePhoneDetails, filterPhoneNumbers }) {
      number: <input type="number" name="" id="no" />
     </div>
     <div>
-     <button type="submit" onMouseLeave={filterPhoneNumbers}>
-      add
-     </button>
+     <button type="submit">add</button>
     </div>
    </form>
   </div>
