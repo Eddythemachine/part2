@@ -14,11 +14,11 @@ const App = () => {
   event.preventDefault();
   const name = document.getElementById("name").value;
   const no = document.getElementById("no").value;
-  const id = persons.length + 1;
+  // const id = persons.length + 1;
   const data = {
    name: name,
    no: no,
-   id: id,
+   //  id: id,
   };
   let newData = [];
   newData = [...persons];
@@ -29,8 +29,13 @@ const App = () => {
   if (found) {
    alert(`${name} exists in phone book`);
   } else {
-   setPersons(newData);
+   axios.post("http://localhost:3001/persons", data).then((response) => {
+    console.log(response);
+    setPersons(newData);
+   });
   }
+
+  // axios.post("");
  };
  const showList = persons.filter((el) => {
   return el.name.toLowerCase().includes(searchWorld.toLowerCase());
@@ -48,7 +53,6 @@ const App = () => {
    });
   };
  }, []);
- console.log(persons);
  return (
   <div>
    <h1>Phonebook</h1>
