@@ -1,6 +1,6 @@
 import React from "react";
 
-function Persons({ data }) {
+function Persons({ data, deleteBtn }) {
  return (
   <div>
    {data.map((el) => {
@@ -9,6 +9,13 @@ function Persons({ data }) {
     return (
      <p key={id}>
       Name:{name}: {no}
+      <button
+       onClick={() => {
+        deleteBtn(id);
+       }}
+      >
+       delete
+      </button>
      </p>
     );
    })}

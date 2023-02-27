@@ -2,12 +2,20 @@
 import { useState, useEffect } from "react";
 import Personform from "./components/Personform.jsx";
 import Persons from "./components/Persons.jsx";
-import axios from "axios";
+import services from "./services/services.js";
 
 const App = () => {
  // useState
  const [persons, setPersons] = useState([]);
  const [searchWorld, setSearchWorld] = useState("");
+
+ useEffect(() => {
+  return () => {
+   services.getNumber().then((res) => {
+    setPersons(res.data);
+   });
+  };
+ }, []);
 
  // Adding phonebook
  const savePhoneDetails = (event) => {
@@ -29,7 +37,7 @@ const App = () => {
   if (found) {
    alert(`${name} exists in phone book`);
   } else {
-   axios.post("http://localhost:3001/persons", data).then((response) => {
+   services.createNumber(data).then((response) => {
     console.log(response);
     setPersons(newData);
    });
@@ -44,15 +52,10 @@ const App = () => {
  function filterPhoneNumbers(event) {
   setSearchWorld(event.target.value);
  }
- useEffect(() => {
-  console.log("Start effect");
-  return () => {
-   axios.get("http://localhost:3001/persons").then((res) => {
-    console.log("Inside effect");
-    setPersons(res.data);
-   });
-  };
- }, []);
+
+ const deleteBtn = (id) => {
+  console.log(id);
+ };
 
  return (
   <div>
@@ -65,7 +68,7 @@ const App = () => {
    <h2>Add a new</h2>
    <Personform savePhoneDetails={savePhoneDetails} />
    <h2>Numbers</h2>
-   <Persons data={showList} />
+   <Persons data={showList} deleteBtn={deleteBtn} />
   </div>
  );
 };
