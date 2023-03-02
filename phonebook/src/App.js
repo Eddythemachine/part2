@@ -22,11 +22,10 @@ const App = () => {
   event.preventDefault();
   const name = document.getElementById("name").value;
   const no = document.getElementById("no").value;
-  const id = persons.length + 1;
+  // const id = persons.length + 1;
   const data = {
    name: name,
    no: no,
-   id: id,
   };
   let newData = [];
   newData = [...persons];
@@ -54,7 +53,17 @@ const App = () => {
  }
 
  const deleteBtn = (id) => {
-  console.log(id);
+  services.getNumber().then((res) => {
+   const data = res.data;
+   const newList = data.filter((el) => {
+    return id !== el.id;
+   });
+   //  const delItem = data.find((el) => {
+   //   return id === el.id;
+   //  });
+   setPersons(newList);
+   services.deleteNumber(`http://localhost:3001/persons/${id}`);
+  });
  };
 
  return (

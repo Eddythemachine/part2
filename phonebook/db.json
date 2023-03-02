@@ -1,39 +1,24 @@
 {
- "persons": [
-  {
-   "name": "Arto Hellas",
-   "no": "040-123456",
-   "id": 1
-  },
-  {
-   "name": "Ada Lovelace",
-   "no": "39-44-5323523",
-   "id": 2
-  },
-  {
-   "name": "Dan Abramov",
-   "no": "12-43-234345",
-   "id": 3
-  },
-  {
-   "name": "Mary Poppendieck",
-   "no": "39-23-6423122",
-   "id": 4
-  },
-  {
-   "name": "Christopher Odogwu Papa Goodluck",
-   "no": "08076576576",
-   "id": 5
-  },
-  {
-   "name": "Onayifeke Oghenerunor Edison",
-   "no": "08127373813",
-   "id": 6
-  },
-  {
-   "name": "Jane",
-   "no": "8075756670",
-   "id": 7
-  }
- ]
+  "persons": [
+    {
+      "name": "Mary Poppendieck",
+      "no": "39-23-6423122",
+      "id": 4
+    },
+    {
+      "name": "Christopher Odogwu Papa Goodluck",
+      "no": "08076576576",
+      "id": 5
+    },
+    {
+      "name": "Onayifeke Oghenerunor Edison",
+      "no": "08127373813",
+      "id": 6
+    },
+    {
+      "name": "Jane",
+      "no": "8075756670",
+      "id": 7
+    }
+  ]
 }

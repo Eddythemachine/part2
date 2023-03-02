@@ -15,8 +15,8 @@ const updateNumber = (url, data) => {
  return axios.patch(url, data);
 };
 
-const deleteNumber = (url, data) => {
- return axios.patch(url, data);
+const deleteNumber = (url) => {
+ return axios.delete(url);
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
